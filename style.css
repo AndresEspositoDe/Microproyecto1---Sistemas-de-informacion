@@ -1,0 +1,38 @@
+body {
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    background-color: #00263b;
+    font-size: 20px;
+}
+
+.header {
+    text-align: center;
+    background-color: #00a1ab;
+    padding: 5px;
+}
+
+h1 {
+    font-family: "Workbench", sans-serif;
+    color: #ff5200;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-size: 84px;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 8px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.form-input {
+    border-radius: 4px;
+    padding: 10px;
+    width: 200px;
+    color: #ffffff;
+    background-color: #ff5200;
+    margin: 15px;
+    font-size: 20px;
+}
