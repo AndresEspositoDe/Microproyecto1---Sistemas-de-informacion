@@ -6,6 +6,51 @@
     <title>Bingo Blast</title>
 </head>
 <body>
+    <div class="header">
+        <h1>Bingo Blast</h1>
+    </div>
+    <div id="menu">
+        <div id="victorias">
+          <h2>Victorias acumuladas</h2>
+          <ul id="victorias-lista">
+            <!-- victorias acumuladas -->
+          </ul>
+        </div>
+        <div id="configuracion">
+          <h2>Configuración del juego</h2>
+          <form id="config-form">
+            <div class="campo-form">
+              <label for="player1">Jugador 1:</label>
+              <input type="text" id="player1" required class="form-input" />
+            </div>
+            <div class="campo-form">
+              <label for="player2">Jugador 2:</label>
+              <input type="text" id="player2" required class="form-input" />
+            </div>
+            <div class="campo-form">
+              <label for="player3">Jugador 3:</label>
+              <input type="text" id="player3" required class="form-input" />
+            </div>
+            <div class="campo-form">
+              <label for="player3">Jugador 4:</label>
+              <input type="text" id="player4" required class="form-input" />
+            </div>
+  
+            <div class="campo-form">
+              <label for="carton-size">Tamaño del cartón:</label>
+              <select id="carton-size">
+                <option value="3">3x3</option>
+                <option value="4">4x4</option>
+                <option value="5">5x5</option>
+              </select>
+            </div>
+  
+            <div class="boton">
+              <input type="submit" value="Iniciar" class="boton-iniciar" />
+            </div>
+          </form>
+        </div>
+    </div>
     
 </body>
 </html>
