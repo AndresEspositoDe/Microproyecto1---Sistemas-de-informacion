@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const sacarNumeroBtn = document.getElementById("sacar-numero");
     const numeroSacadoDiv = document.getElementById("numero-sacado");
     const contadorElemento = document.getElementById("contador");
+    const terminarJuegoBtn = document.getElementById("terminar-juego");
 
   
     let jugadores = [];
@@ -160,7 +161,11 @@ document.addEventListener("DOMContentLoaded", function() {
       alert(`¡Felicidades ${jugador}! Has ganado el juego.`);
       location.reload();
     }
-  
+    
+    // Manejar evento de terminar juego
+    terminarJuegoBtn.addEventListener("click", () => {
+    finalizarJuego();
+    });
     // Manejar evento de inicio de juego
     configForm.addEventListener("submit", iniciarJuego);
     // Manejar evento de sacar número de Bingo
