@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const configForm = document.getElementById("config-form");
     const cartonesContainer = document.getElementById("cartones");
     const sacarNumeroBtn = document.getElementById("sacar-numero");
+    const numeroSacadoDiv = document.getElementById("numero-sacado");
 
   
     let jugadores = [];
@@ -44,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
       const jugador3 = document.getElementById("player3").value;
       const jugador4 = document.getElementById("player4").value;
       // Obtener nombres de los jugadores
-      // Aquí deberías obtener el nombre de los otros jugadores de manera similar
       jugadores = [jugador1,jugador2,jugador3,jugador4];
       // Generar cartones para todos los jugadores
       const tamañoCarton = parseInt(document.getElementById("carton-size").value);
@@ -77,7 +77,20 @@ document.addEventListener("DOMContentLoaded", function() {
         cartonesContainer.appendChild(cartonDiv);
       });
     }
-  
+    
+    // Sacar número de Bingo aleatorio
+    function sacarNumero() {
+        const numero = generarNumeroAleatorio();
+        numeroSacadoDiv.textContent = `Número sacado: ${numero}`;
+        // Actualizar cartones y puntajes
+        cartones.forEach((carton, index) => {
+          const marca = marcarNumero(carton, numero);
+          if (marca) {
+            calcularPuntajes(marca, index);
+            mostrarCartones();
+          }
+        });
+      }
   
     // Generar número aleatorio entre 1 y 50
     function generarNumeroAleatorio() {
