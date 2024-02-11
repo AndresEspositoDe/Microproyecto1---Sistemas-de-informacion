@@ -133,4 +133,9 @@ h2 {
     letter-spacing: 8px;
     padding: 20px 0px;
 }
-  
+
+@media (max-width: 768px) {
+    .boton-iniciar,.form-input,#carton-size, .boton, #sacar-numero, #numero-sacado, .carton td, .carton, #juego, #cartones,#victorias-lista, #config-form, .campo-form, h1,h2, .header {
+        font-size: 20px;
+    }
+}
