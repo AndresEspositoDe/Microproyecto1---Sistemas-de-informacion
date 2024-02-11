@@ -4,11 +4,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const cartonesContainer = document.getElementById("cartones");
     const sacarNumeroBtn = document.getElementById("sacar-numero");
     const numeroSacadoDiv = document.getElementById("numero-sacado");
+    const contadorElemento = document.getElementById("contador");
 
   
     let jugadores = [];
     let cartones = [];
     let puntajes = [];
+    let contadorClicks = 0;
   
     // Cargar victorias acumuladas desde localStorage
     function cargarVictorias() {
@@ -90,14 +92,64 @@ document.addEventListener("DOMContentLoaded", function() {
             mostrarCartones();
           }
         });
-      }
+    }
   
     // Generar número aleatorio entre 1 y 50
     function generarNumeroAleatorio() {
       return Math.floor(Math.random() * 50) + 1;
     }
 
-  
+    function marcarNumero(carton, numero) {
+        for (let i = 0; i < carton.length; i++) {
+          const fila = carton[i];
+          const numeroIndex = fila.indexOf(numero);
+          if (numeroIndex !== -1) {
+            fila[numeroIndex] = "X";
+            return { fila: i, columna: numeroIndex };
+          }
+        }
+        return null;
+    }
+
+    // Calcular puntajes y verificar si hay ganador
+    function calcularPuntajes(marca, jugadorIndex) {
+        const [fila, columna] = [marca.fila, marca.columna];
+        // Verificar si hay línea horizontal
+        const lineaHorizontal = cartones[jugadorIndex][fila].every(num => num === "X");
+        // Verificar si hay línea vertical
+        const lineaVertical = cartones[jugadorIndex].every(fila => fila[columna] === "X");
+        // Verificar si hay línea diagonal (principal o inversa)
+        const diagonalPrincipal = cartones[jugadorIndex].every((fila, i) => fila[i] === "X");
+        const diagonalInversa = cartones[jugadorIndex].every((fila, i) => fila[fila.length - 1 - i] === "X");
+      
+        let puntaje = 0;
+        if (lineaHorizontal) puntaje += 1;
+        if (lineaVertical) puntaje += 1;
+        if (diagonalPrincipal || diagonalInversa) puntaje += 3;
+      
+        puntajes[jugadorIndex] = (puntajes[jugadorIndex] || 0) + puntaje;
+        // Actualizar tabla de puntajes
+        actualizarTablaPuntajes();
+        // Verificar si hay cartón lleno
+        const cartonLleno = cartones[jugadorIndex].every(fila => fila.every(num => num === "X"));
+        if (cartonLleno || puntajes[jugadorIndex] >= 5) {
+          // Terminar juego
+          finalizarJuego(jugadorIndex);
+        }
+    }
+
+        // Actualizar tabla de puntajes
+    function actualizarTablaPuntajes() {
+        const puntajesTabla = document.getElementById("puntajes-tabla");
+        puntajesTabla.innerHTML = "";
+        puntajes.forEach((puntaje, index) => {
+            const jugador = jugadores[index];
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${jugador}</td><td>${puntaje}</td>`;
+            puntajesTabla.appendChild(row);
+        });
+    }
+
     // Finalizar juego y mostrar resultados
     function finalizarJuego(jugadorIndex) {
       const victoriasGuardadas = JSON.parse(localStorage.getItem("victorias")) || {};
@@ -113,5 +165,10 @@ document.addEventListener("DOMContentLoaded", function() {
     configForm.addEventListener("submit", iniciarJuego);
     // Manejar evento de sacar número de Bingo
     sacarNumeroBtn.addEventListener("click", sacarNumero);
+    // Manejar evento de sacar número de Bingo
+    sacarNumeroBtn.addEventListener("click", () => {
+    contadorClicks++;
+    contadorElemento.textContent = contadorClicks;
+  });
   });
   
